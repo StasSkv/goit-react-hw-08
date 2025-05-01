@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 340px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.input {
+  padding: 8px 10px;
+  border: 2px solid black;
+  font-size: 16px;
+  outline: none;
+  min-width: 300px;
+}
+
+.btnAddUser {
+  padding: 10px 15px;
+  max-width: 200px;
+  background-color: green;
+  border-radius: 5px;
+  border: none;
+  color: aliceblue;
+}
+
+.error {
+  color: red;
+}
