@@ -1,8 +1,7 @@
-import css from './Contact.module.css';
-import { AiFillContacts } from 'react-icons/ai';
-import { AiFillPhone } from 'react-icons/ai';
+import { Card, CardContent, Typography, IconButton, Box } from '@mui/material';
+import { Delete, Phone, AccountCircle } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsOps';
+import { deleteContact } from '../../redux/contacts/operations';
 
 const Contact = ({ contact }) => {
   const dispatch = useDispatch();
@@ -10,26 +9,40 @@ const Contact = ({ contact }) => {
   const handleDelete = () => {
     dispatch(deleteContact(contact.id));
   };
+
   return (
-    <>
-      <div className={css.userInfo}>
-        <p className={css.userName}>
-          <span>
-            <AiFillContacts size={20} />
-          </span>
-          {contact.name}
-        </p>
-        <p className={css.userPhone}>
-          <span>
-            <AiFillPhone size={20} />
-          </span>
-          {contact.number}
-        </p>
-      </div>
-      <button type="button" className={css.btnDeleteUser} onClick={handleDelete}>
-        Delete
-      </button>
-    </>
+    <Card
+      sx={{
+        p: 1,
+        backgroundColor: '#f5f5f5',
+        borderRadius: 2,
+        boxShadow: 2,
+        '&:hover': { boxShadow: 4 },
+      }}
+    >
+      <CardContent>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box>
+            <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <AccountCircle fontSize="small" />
+              {contact.name}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+            >
+              <Phone fontSize="small" />
+              {contact.number}
+            </Typography>
+          </Box>
+
+          <IconButton onClick={handleDelete} color="error" size="large">
+            <Delete />
+          </IconButton>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 

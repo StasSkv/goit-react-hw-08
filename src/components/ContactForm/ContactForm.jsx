@@ -1,10 +1,10 @@
-import css from './ContactForm.module.css';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
+import { TextField, Button, Box, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { addContact } from '../../redux/contactsOps';
+import { addContact } from '../../redux/contacts/operations';
 
-const contactSchema = Yup.object().shape({
+const validationSchema = Yup.object({
   name: Yup.string()
     .min(3, 'The name is too short!')
     .max(50, 'The name is too long!')
@@ -15,40 +15,80 @@ const contactSchema = Yup.object().shape({
     .required('Required field'),
 });
 
+const initialValues = {
+  name: '',
+  number: '',
+};
+
 const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, { resetForm }) => {
-    const { name, number } = values;
+  const handleSubmit = ({ name, number }, { resetForm }) => {
     dispatch(addContact({ name, number }));
     resetForm();
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+    document.activeElement?.blur();
   };
 
   return (
-    <Formik
-      initialValues={{ name: '', number: '' }}
-      onSubmit={handleSubmit}
-      validationSchema={contactSchema}
-    >
-      <Form className={css.form}>
-        <label htmlFor="name" className={css.label}>
-          Name <Field className={css.input} type="text" name="name" id="name" />
-          <ErrorMessage name="name" component="span" className={css.error} />
-        </label>
+    <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4, mr:0, ml: 0 }}>
+      <Typography variant="h5" sx={{ mb: 2 }}>
+        Створити новий контакт
+      </Typography>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched, handleChange, handleBlur, values }) => (
+          <Form>
+            <TextField
+              fullWidth
+              margin="normal"
+              id="name"
+              name="name"
+              label="Імʼя"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.name && Boolean(errors.name)}
+              helperText={touched.name && errors.name}
+            />
 
-        <label htmlFor="number" className={css.label}>
-          Number <Field className={css.input} type="tel" name="number" id="number" />
-          <ErrorMessage name="number" component="span" className={css.error} />
-        </label>
+            <TextField
+              fullWidth
+              margin="normal"
+              id="number"
+              name="number"
+              label="Номер телефону"
+              type="tel"
+              value={values.number}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.number && Boolean(errors.number)}
+              helperText={touched.number && errors.number}
+            />
 
-        <button type="submit" className={css.btnAddUser}>
-          Add contact
-        </button>
-      </Form>
-    </Formik>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                mt: 2,
+                backgroundColor: '#f0f0f0',
+                color: 'black',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  backgroundColor: 'green',
+                  color: '#f0f0f0',
+                },
+              }}
+            >
+              Додати контакт
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </Box>
   );
 };
 

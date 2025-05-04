@@ -1,0 +1,9 @@
+.contacts {
+    padding-top: 20px;
+}
+
+.formsWrap {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 24px;
+}
