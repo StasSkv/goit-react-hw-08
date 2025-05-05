@@ -51,7 +51,6 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   const state = thunkAPI.getState();
   const persistedToken = state.auth.token;
   if (persistedToken === null) {
-    toast.error('Користувач не знайдений!');
     return thunkAPI.rejectWithValue('Користувач не знайдений');
   }
   try {

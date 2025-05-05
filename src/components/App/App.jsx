@@ -20,10 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, [dispatch,]);
-  
-  console.log(isRefreshing);
-  
+  }, [dispatch]);
 
   return isRefreshing ? (
     <Loader />
