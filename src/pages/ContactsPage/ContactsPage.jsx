@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoading } from '../../redux/contacts/selectors';
 import Loader from '../../components/Loader/Loader';
 
+
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
@@ -19,10 +20,10 @@ const ContactsPage = () => {
   return (
     <section className={s.contacts}>
       <div className="container">
-     <div className={s.formsWrap}>
+        <div className={s.formsWrap}>
           <ContactForm />
           <SearchBox />
-     </div>
+        </div>
         <div>{isLoading && <Loader />}</div>
         <ContactList />
       </div>

@@ -2,9 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { selectFilter } from '../filters/selectors';
 
 export const selectContacts = (state) => state.contacts.items;
-
 export const selectIsLoading = (state) => state.contacts.isLoading;
-
 export const selectError = (state) => state.contacts.error;
 
 export const selectFilteredContacts = createSelector(
@@ -12,10 +10,14 @@ export const selectFilteredContacts = createSelector(
   (contacts, filter) => {
     if (!filter) return contacts;
     const { name = '', number = '' } = filter;
-    const filterValue = (name || number).toLowerCase().trim();
-    const searchField = name ? 'name' : 'number';
-    return contacts.filter((contact) => {
-      return contact[searchField].toLowerCase().includes(filterValue);
-    });
+    const trimmedName = name.trim().toLowerCase();
+    const trimmedNumber = number.trim();
+    if (trimmedName) {
+      return contacts.filter((contact) => contact.name.toLowerCase().includes(trimmedName));
+    }
+    if (trimmedNumber) {
+      return contacts.filter((contact) => contact.number.includes(trimmedNumber));
+    }
+    return contacts;
   }
 );

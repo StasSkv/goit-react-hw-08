@@ -29,7 +29,6 @@ const SearchBox = () => {
           query: filter?.name || '',
         }}
         onSubmit={({ searchType, query }) => {
-             console.log('Submitted data:', { searchType, query });
           dispatch(changeFilter({ type: searchType, value: query }));
         }}
       >

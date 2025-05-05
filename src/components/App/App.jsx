@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, Suspense, useEffect } from 'react';
-import { fetchContacts } from '../../redux/contacts/operations';
 import { selectError, selectIsLoading } from '../../redux/contacts/selectors';
 import Loader from '../Loader/Loader';
 import { ToastContainer } from 'react-toastify';
@@ -28,10 +27,12 @@ function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <Loader />
-  ) : (
-    <Suspense fallback={null}>
+  if (isRefreshing) {
+    return <Loader />;
+  }
+
+  return (
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
