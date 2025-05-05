@@ -17,7 +17,7 @@ import { register } from '../../redux/auth/operations';
 const validationSchema = Yup.object({
   name: Yup.string().required("Обов'язкове поле"),
   email: Yup.string().email('Невірний email').required("Обов'язкове поле"),
-  password: Yup.string().min(6, 'Мінімум 6 символів').required("Обов'язкове поле"),
+  password: Yup.string().min(7, 'Мінімум 7 символів').required("Обов'язкове поле"),
   accept: Yup.boolean().oneOf([true], 'Потрібно прийняти умови'),
 });
 

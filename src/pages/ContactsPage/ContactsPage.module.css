@@ -7,3 +7,9 @@
     justify-content: space-around;
     margin-bottom: 24px;
 }
+
+@media screen and (max-width: 768px) {
+    .formsWrap {
+        flex-direction: column;
+    }
+}

@@ -6,13 +6,13 @@ import { addContact } from '../../redux/contacts/operations';
 
 const validationSchema = Yup.object({
   name: Yup.string()
-    .min(3, 'The name is too short!')
-    .max(50, 'The name is too long!')
-    .required('Required field'),
+    .min(3, 'Імʼя занадто коротке!')
+    .max(50, 'Імʼя занадто довге!')
+    .required('Обовʼязкове поле'),
   number: Yup.string()
-    .min(3, 'The number is too short!')
-    .max(20, 'The number is too long!')
-    .required('Required field'),
+    .min(3, 'Номер телефону занадто короткий!')
+    .max(20, 'Номер телефону занадто довгий!')
+    .required('Обовʼязкове поле'),
 });
 
 const initialValues = {
@@ -30,7 +30,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4, mr:0, ml: 0 }}>
+    <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4, mr: 0, ml: 0 }}>
       <Typography variant="h5" sx={{ mb: 2 }}>
         Створити новий контакт
       </Typography>

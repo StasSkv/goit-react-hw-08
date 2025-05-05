@@ -48,6 +48,7 @@ const SearchBox = () => {
                 labelId="search-type-label"
                 id="searchType"
                 name="searchType"
+                label="Пошук за"
                 value={values.searchType}
                 onChange={(e) => {
                   const newType = e.target.value;
